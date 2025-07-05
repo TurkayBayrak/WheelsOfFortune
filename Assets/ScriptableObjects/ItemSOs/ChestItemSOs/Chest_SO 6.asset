@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
+  m_Name: Chest_SO 6
+  m_EditorClassIdentifier: 
+  itemName: STANDARD CHEST
+  itemType: 4
+  itemSprite: {fileID: 21300000, guid: dc37e23f70e044cf79b3bf17efebc2b4, type: 3}
+  itemId: 2006
+  defaultItemAmount: 1
+  item_SOs:
+  - {fileID: 11400000, guid: c08dd719421a7490f88ece95da0eb7a8, type: 2}
+  - {fileID: 11400000, guid: f3267ffaa2dc84431839877927b70e22, type: 2}

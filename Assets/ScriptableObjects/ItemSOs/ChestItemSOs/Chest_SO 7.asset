@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
+  m_Name: Chest_SO 7
+  m_EditorClassIdentifier: 
+  itemName: SUPER CHEST
+  itemType: 4
+  itemSprite: {fileID: 21300000, guid: 2eb9e620970284df59d5e65987010a13, type: 3}
+  itemId: 2007
+  defaultItemAmount: 1
+  item_SOs:
+  - {fileID: 11400000, guid: 45ee664edecd84ab9a57f968d14639a5, type: 2}
+  - {fileID: 11400000, guid: 531d792e8745543a4b1335e3adcd23d2, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 9048493b88301431e9853c0d2e4a18f0, type: 2}
+  - {fileID: 11400000, guid: 1179d1225af4a406aaacdfa816b5dde5, type: 2}
+  - {fileID: 11400000, guid: a0650d01b34b5469698780a0f3bcfc4e, type: 2}
+  - {fileID: 11400000, guid: 387608d1866b648869b2341e18d0596c, type: 2}
+  - {fileID: 11400000, guid: 45ee664edecd84ab9a57f968d14639a5, type: 2}

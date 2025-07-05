@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
+  m_Name: Chest_SO 3
+  m_EditorClassIdentifier: 
+  itemName: GOLD CHEST
+  itemType: 4
+  itemSprite: {fileID: 21300000, guid: 063f32db5d2a54aa6948819211e7b3d1, type: 3}
+  itemId: 2003
+  defaultItemAmount: 1
+  item_SOs:
+  - {fileID: 11400000, guid: c08dd719421a7490f88ece95da0eb7a8, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 79a8701a3d8134868913d7d46b4741b9, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
