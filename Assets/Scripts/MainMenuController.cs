@@ -26,7 +26,6 @@ public class MainMenuController : MonoBehaviour
         EventManager.OnCashOutButtonClicked += CashOutButtonClicked;
         EventManager.OnGiveUpButtonClicked += GiveUpButtonClicked;
 
-
         fadeImage.DOFade(1, 0);
 
         StartCoroutine(WaitCo());
@@ -43,6 +42,7 @@ public class MainMenuController : MonoBehaviour
         PlayIdleAnimation();
     }
 
+
     private void OnDisable()
     {
         EventManager.OnCashOutButtonClicked -= CashOutButtonClicked;
@@ -52,15 +52,18 @@ public class MainMenuController : MonoBehaviour
         inventoryButton.onClick.RemoveAllListeners();
     }
 
+
     private void CashOutButtonClicked()
     {
         SetMainMenuOnReturn();
     }
 
+
     private void GiveUpButtonClicked()
     {
         SetMainMenuOnReturn();
     }
+
 
     private void SetMainMenuOnReturn()
     {
@@ -71,12 +74,6 @@ public class MainMenuController : MonoBehaviour
     }
 
 
-    private void PlayEntryFeeAnimation()
-    {
-        
-    }
-
-
     private void PlayButtonClickedAction()
     {
         if (inventory.IsAmountInsufficient(-1000, 0))
@@ -84,6 +81,8 @@ public class MainMenuController : MonoBehaviour
             EventManager.InsufficientAmount(false);
             return;
         }
+
+        EventManager.PlayCashAnimamation();
 
         playButton.interactable = false;
         inventoryButton.interactable = false;
@@ -109,6 +108,7 @@ public class MainMenuController : MonoBehaviour
 
         panelParentTransform.gameObject.SetActive(false);
     }
+
 
     private void PlayIdleAnimation()
     {

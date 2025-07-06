@@ -24,6 +24,5 @@ public class ScrollSetter : MonoBehaviour
             contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
             contentRectTransform.DOAnchorPosX(-deltaSize * .5f, 0);
         }
-
     }
 }

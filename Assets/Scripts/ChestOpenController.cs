@@ -30,7 +30,7 @@ public class ChestOpenController : MonoBehaviour
     private CanvasGroup continueButtonCanvasGroup;
 
     private readonly List<ChestCard> chestCards = new();
-    private List<Item_SO> currentChestItemsList = new();
+    private readonly List<Item_SO> currentChestItemsList = new();
 
     private int playedCardCount;
 
@@ -55,16 +55,13 @@ public class ChestOpenController : MonoBehaviour
         skipButton.onClick.RemoveAllListeners();
     }
 
-    private void PlayChestOpenningSequence(WheelSlot wheelSlot)
+    private void PlayChestOpenningSequence(Chest_SO chestSO)
     {
         continueButton.interactable = false;
         continueButtonCanvasGroup.DOFade(0, 0);
         panelParentTransform.gameObject.SetActive(true);
         cardIndicatorTransform.gameObject.SetActive(true);
         chestImage.gameObject.SetActive(true);
-
-
-        var chestSO = (Chest_SO)wheelSlot.CurrentItem_SO;
 
         chestImage.sprite = chestSO.itemSprite;
 

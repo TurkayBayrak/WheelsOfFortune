@@ -137,19 +137,19 @@ SpriteAtlas:
   - ui_icon_baseball_cap_easter
   - ui_button_orange_standard
   - ui_icon_chest_big_nolight
-  - UI_Icon_Renders_tier3_sniper
+  - ui_Icon_Renders_tier3_sniper
   - ui_card_frame_4px_zone
   - ui_icon_render_cons_grenade_m67
   - ui_spin_golden_base
   - UI_Icons_Pistol_Points
   - ui_card_panel_zone_current_white
-  - UI_Icon_Renders_tier2_mle
+  - ui_Icon_Renders_tier2_mle
   - ui_card_panel_zone_bg
-  - UI_Icon_Renders_tier3_smg
+  - ui_Icon_Renders_tier3_smg
   - ui_card_panel_zone_current
   - ui_star_flash_alpha
   - ui_card_icon_death
-  - UI_Icon_Renders_tier2_rifle
+  - ui_Icon_Renders_tier2_rifle
   - ui_star_glow_alpha
   - ui_card_panel_zone_coming
   - ui_spin_bronze_base
@@ -164,7 +164,7 @@ SpriteAtlas:
   - ui_icon_render_cons_healthshot_2_regenerator
   - ui_icon_chest_small_noligt
   - ui_icon_aviator_glasses_easter
-  - UI_Icon_Renders_tier1_shotgun
+  - ui_Icon_Renders_tier1_shotgun
   - ui_card_frame_gardient
   - ui_icon_render_t_cons_molotov
   - ui_spin_golden_indicator
@@ -173,7 +173,7 @@ SpriteAtlas:
   - ui_icon_helmet_pumpkin
   - ui_card_panel_zone_super
   - UI_Icons_SMG_Points
-  - UI_Icon_Renders_tier3_shotgun
+  - ui_Icon_Renders_tier3_shotgun
   - ui_button_grey_standard
   - ui_icon_gold
   - ui_icon_cash

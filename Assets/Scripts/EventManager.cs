@@ -17,7 +17,6 @@ public class EventManager : MonoBehaviour
         OnItemClaimed?.Invoke(amount, item_SO, item_SOs);
     }
 
-
     public static Action OnPlayButtonClicked;
 
     public static void PlayButtonClicked()
@@ -39,8 +38,6 @@ public class EventManager : MonoBehaviour
         OnBeginFade?.Invoke(value, duration, isBlack);
     }
 
-
-
     public static Action OnRevivedContinueButtonClicked;
 
     public static void RevivedContinueButtonClicked()
@@ -48,14 +45,12 @@ public class EventManager : MonoBehaviour
         OnRevivedContinueButtonClicked?.Invoke();
     }
 
-
     public static Action OnInventoryButtonClicked;
 
     public static void InventoryButtonClicked()
     {
         OnInventoryButtonClicked?.Invoke();
     }
-
 
     public static Action OnWheelSpinned;
 
@@ -71,6 +66,12 @@ public class EventManager : MonoBehaviour
         OnBombIndicated?.Invoke();
     }
 
+    public static Action OnPlayCashAnimamation;
+
+    public static void PlayCashAnimamation()
+    {
+        OnPlayCashAnimamation?.Invoke();
+    }
 
     public static Action OnCashOutButtonClicked;
 
@@ -86,12 +87,11 @@ public class EventManager : MonoBehaviour
         OnInsufficientAmount?.Invoke(isCash);
     }
 
+    public static Action<Chest_SO> OnChestOpenButtonClicked;
 
-    public static Action<WheelSlot> OnChestOpenButtonClicked;
-
-    public static void ChestOpenButtonClicked(WheelSlot wheelSlot)
+    public static void ChestOpenButtonClicked(Chest_SO chestSO)
     {
-        OnChestOpenButtonClicked?.Invoke(wheelSlot);
+        OnChestOpenButtonClicked?.Invoke(chestSO);
     }
 
     public static Action<int, int, bool> OnCurrencyAmountChanged;
@@ -101,12 +101,10 @@ public class EventManager : MonoBehaviour
         OnCurrencyAmountChanged?.Invoke(amount, currencyId, playAnimation);
     }
 
-
     public static Action<int, int, int, bool> OnCurrencyAmountSet;
 
     public static void CurrencyAmountSet(int amount, int currentAmount, int currencyId, bool playAnimation)
     {
         OnCurrencyAmountSet?.Invoke(amount, currentAmount, currencyId, playAnimation);
     }
-
 }

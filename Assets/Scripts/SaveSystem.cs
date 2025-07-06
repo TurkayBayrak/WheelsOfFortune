@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+
 public static class SaveSystem
 {
     public static void SaveInventoryData(Inventory inventory)
@@ -15,6 +16,7 @@ public static class SaveSystem
         formatter.Serialize(stream, inventoryData);
         stream.Close();
     }
+
 
     public static InventoryData LoadInventoryData()
     {
@@ -36,6 +38,5 @@ public static class SaveSystem
             Debug.Log("No Save File");
             return null;
         }
-
     }
 }

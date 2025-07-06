@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -24,9 +23,6 @@ public class CurrencyTextSetter : MonoBehaviour
     {
         var textMesh = currencyId == 0 ? cashText : goldText;
 
-        //Int32.TryParse(textMesh.text, out int x);
-
         DOVirtual.Int(currentAmount, amount, 1.3f, (value) => textMesh.text = value.ToString());
     }
-
 }

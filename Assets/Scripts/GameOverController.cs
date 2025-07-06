@@ -21,7 +21,6 @@ public class GameOverController : MonoBehaviour
 
 
     [SerializeField] private Image deathImage;
-
     [SerializeField] private Inventory inventory;
 
 
@@ -109,13 +108,9 @@ public class GameOverController : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         deathImage.transform.DOScale(new Vector2(.5f, .5f), 0);
         deathImage.DOFade(0, 0);
+        textParentCanvasGroup.DOFade(0, 0);
+        buttonsParentCanvasGroup.DOFade(0, 0);
         SetPanelsDeactive();
-    }
-
-    private void SetPanelsDeactive()
-    {
-        revivedPanelTransform.gameObject.SetActive(false);
-        panelParentTransform.gameObject.SetActive(false);
     }
 
     private void WatchAdButtonOnClickAction()
@@ -127,4 +122,9 @@ public class GameOverController : MonoBehaviour
         revivedContinueButton.interactable = true;
     }
 
+    private void SetPanelsDeactive()
+    {
+        revivedPanelTransform.gameObject.SetActive(false);
+        panelParentTransform.gameObject.SetActive(false);
+    }
 }

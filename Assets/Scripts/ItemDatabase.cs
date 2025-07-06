@@ -6,7 +6,6 @@ public class ItemDatabase : MonoBehaviour
     [SerializeField] private Item_SO[] allUpgradeItem_SOs;
 
 
-
     public Item_SO GetItemSoById(int itemId, ItemTypes itemTypes)
     {
         var soArray = itemTypes == ItemTypes.SpecialItem ? allSpecialItem_SOs : allUpgradeItem_SOs;
@@ -20,5 +19,4 @@ public class ItemDatabase : MonoBehaviour
 
         return null;
     }
-
 }

@@ -18,13 +18,20 @@ public class RewardClaimController : MonoBehaviour
 
     private Image glowImage;
     private Image claimButtonImage;
-    private TextMeshProUGUI claimButtonText;
 
+    private TextMeshProUGUI claimButtonText;
 
     private WheelSlot currentWheelSlot;
 
     private Sequence rewardSequence;
+
     private Tween idleSpinTween;
+
+    private const string OPEN_STRING = "OPEN";
+    private const string CLAIM_STRING = "CLAIM";
+
+    private Vector3 idelSpinV3 = new(0, 0, -360f);
+
 
     private void OnEnable()
     {
@@ -59,7 +66,7 @@ public class RewardClaimController : MonoBehaviour
         rewardItemNameText.text = wheelSlot.CurrentItem_SO.itemName;
         rewardAmountText.text = "x" + wheelSlot.CurrentItemAmount;
 
-        claimButtonText.text = wheelSlot.CurrentItem_SO.itemType is ItemTypes.Chest ? "OPEN" : "CLAIM";
+        claimButtonText.text = wheelSlot.CurrentItem_SO.itemType is ItemTypes.Chest ? OPEN_STRING : CLAIM_STRING;
 
         rewardItemSecondNameText.gameObject.SetActive(false);
 
@@ -87,7 +94,7 @@ public class RewardClaimController : MonoBehaviour
             .Append(claimButtonImage.DOFade(1, .5f))
             .Join(claimButtonText.DOFade(1, .5f));
 
-        idleSpinTween = glowTransform.DORotate(new Vector3(0, 0, -360f), 10f, RotateMode.FastBeyond360)
+        idleSpinTween = glowTransform.DORotate(idelSpinV3, 10f, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Restart).SetRelative().SetEase(Ease.Linear);
     }
 
@@ -96,7 +103,7 @@ public class RewardClaimController : MonoBehaviour
         claimButton.interactable = false;
         if (currentWheelSlot.CurrentItem_SO.itemType is ItemTypes.Chest)
         {
-            EventManager.ChestOpenButtonClicked(currentWheelSlot);
+            EventManager.ChestOpenButtonClicked((Chest_SO)currentWheelSlot.CurrentItem_SO);
             StartCoroutine(WaitCo(0));
         }
         else

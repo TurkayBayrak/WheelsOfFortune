@@ -15,6 +15,8 @@ public class WheelController : MonoBehaviour
     [SerializeField] private Transform panelParentTransform;
     [SerializeField] private Transform slotParentTransform;
 
+    [SerializeField] private AnimationCurve customCurve;
+
 
     private bool isWheelSpinning;
 
@@ -23,8 +25,6 @@ public class WheelController : MonoBehaviour
     private Tween idleSpinTween;
 
     private WheelSlot[] wheelSlots;
-
-    public AnimationCurve customCurve;
 
 
 
@@ -41,6 +41,7 @@ public class WheelController : MonoBehaviour
         wheelSlots = slotParentTransform.GetComponentsInChildren<WheelSlot>();
     }
 
+
     private void OnDisable()
     {
         EventManager.OnPlayButtonClicked -= OnPlayButtonClicked;
@@ -52,16 +53,19 @@ public class WheelController : MonoBehaviour
         spinButton.onClick.RemoveAllListeners();
     }
 
+
     private void GiveUpButtonClicked()
     {
         StartCoroutine(WaitCo());
     }
+
 
     private void CashOutButtonClicked()
     {
         spinButton.interactable = false;
         StartCoroutine(WaitCo());
     }
+
 
     private IEnumerator WaitCo()
     {
@@ -79,11 +83,13 @@ public class WheelController : MonoBehaviour
         StartIdleSpin();
     }
 
+
     private void ItemClaimed(int amount, Item_SO item_SO = null, Item_SO[] item_SOs = null )
     {
         panelParentTransform.gameObject.SetActive(true);
         StartIdleSpin();
     }
+
 
     private void SpinTheWheel()
     {
@@ -119,12 +125,14 @@ public class WheelController : MonoBehaviour
             .SetRelative().SetEase(customCurve).OnComplete(CalculateIndicatedSlot));
     }
 
+
     private void StartIdleSpin()
     {
         isWheelSpinning = false;
         idleSpinTween = wheelTransform.DORotate(wheelRotateV3, 10f, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Restart).SetRelative().SetEase(Ease.Linear);
     }
+
 
     private void CalculateIndicatedSlot()
     {

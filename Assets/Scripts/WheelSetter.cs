@@ -12,7 +12,8 @@ public class WheelSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI zoneCountText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TextMeshProUGUI safeSuperZoneText;
-    public int zoneCount = 1;
+
+    private int zoneCount = 1;
 
     [SerializeField] private Wheel_SO[] wheel_SOs;
 
@@ -21,6 +22,9 @@ public class WheelSetter : MonoBehaviour
     public Wheel_SO CurrentWheel_SO => currentWheel_SO;
     private CanvasGroup cashOutButtonCanvasGroup;
 
+    private const string ZONE_STRING = "ZONE: ";
+    private const string GOLDEN_SPIN_STRING = "GOLDEN SPIN";
+    private const string SILVER_SPIN_STRING = "SILVER SPIN";
 
     private void OnEnable()
     {
@@ -36,7 +40,7 @@ public class WheelSetter : MonoBehaviour
         cashOutButtonCanvasGroup = cashOutButton.gameObject.GetComponent<CanvasGroup>();
 
 
-        zoneCountText.text = "ZONE: " + zoneCount;
+        zoneCountText.text = ZONE_STRING + zoneCount;
     }
 
     private void OnDisable()
@@ -45,6 +49,8 @@ public class WheelSetter : MonoBehaviour
         EventManager.OnItemClaimed -= SetNextZone;
         EventManager.OnWheelSpinned -= WheelSpinned;
         EventManager.OnGiveUpButtonClicked -= GiveUpButtonClicked;
+
+        cashOutButton.onClick.RemoveAllListeners();
     }
 
     private void PlayButtonClicked()
@@ -57,7 +63,7 @@ public class WheelSetter : MonoBehaviour
     private void SetNextZone(int amount, Item_SO item_SO = null, Item_SO[] item_SOs = null)
     {
         zoneCount++;
-        zoneCountText.text = "ZONE " + zoneCount;
+        zoneCountText.text = ZONE_STRING + zoneCount;
         PlayButtonClicked();
     }
 
@@ -67,14 +73,14 @@ public class WheelSetter : MonoBehaviour
         {
             currentWheel_SO = wheel_SOs[2];
             safeSuperZoneText.gameObject.SetActive(true);
-            safeSuperZoneText.text = "GOLDEN SPIN";
+            safeSuperZoneText.text = GOLDEN_SPIN_STRING;
             SetCashOutButton();
         }
         else if (zoneCount % 5 == 0)
         {
             currentWheel_SO = wheel_SOs[1];
             safeSuperZoneText.gameObject.SetActive(true);
-            safeSuperZoneText.text = "SILVER SPIN";
+            safeSuperZoneText.text = SILVER_SPIN_STRING;
             SetCashOutButton();
         }
         else
@@ -133,7 +139,7 @@ public class WheelSetter : MonoBehaviour
         {
             yield return new WaitForSeconds(1.9f);
             zoneCount = 1;
-            zoneCountText.text = "ZONE " + zoneCount;
+            zoneCountText.text = ZONE_STRING + zoneCount;
         }
     }
 }

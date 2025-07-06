@@ -15,6 +15,7 @@ public class WheelSlot : MonoBehaviour
     public int CurrentItemAmount => currentItemAmount;
 
 
+
     public void Init(Item_SO item_SO, int zoneCount)
     {
         currentItem_SO = item_SO;

@@ -16,14 +16,9 @@ public class Inventory : MonoBehaviour
     private Dictionary<int, int> specialItems = new();
     private Dictionary<int, int> upgradeItems = new();
 
-    public Dictionary<int, int> InGameCurrencyItems => inGameCurrencyItems;
-    public Dictionary<int, int> InGameSpecialItems => inGameSpecialItems;
-    public Dictionary<int, int> InGameUpgradeItems => inGameUpgradeItems;
-
     public Dictionary<int, int> CurrencyItems => currencyItems;
     public Dictionary<int, int> SpecialItems => specialItems;
     public Dictionary<int, int> UpgradeItems => upgradeItems;
-
 
 
     [SerializeField] private ScrollRect specialItemScrollRect;
@@ -34,22 +29,23 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI inventoryHeaderText;
 
-
     [SerializeField] private Button inGameInventoryButton;
     [SerializeField] private Button closeButton;
-
-
 
     [SerializeField] private Transform panelParentTransform;
 
     private CanvasGroup inGameInventoryButtonCanvasGroup;
 
-    private List<GameObject> inventoryItemSlotGOs = new();
+    private readonly List<GameObject> inventoryItemSlotGOs = new();
 
     private ItemDatabase itemDatabase;
 
     private readonly int firstSessionCashAmount = 10000;
     private readonly int firstSessionGoldAmount = 50;
+
+    private const string INVENTORY_STRING = "INVENTORY";
+    private const string COLLECTED_ITEMS_STRING = "COLLECTED ITEMS";
+    private const string INVENTORY_ITEM_SLOT_PATH = "Prefabs/InventoryItemSlot";
 
 
     private void Awake()
@@ -65,6 +61,7 @@ public class Inventory : MonoBehaviour
             LoadInventoryData();
         }
     }
+
 
     private void OnEnable()
     {
@@ -85,6 +82,7 @@ public class Inventory : MonoBehaviour
         itemDatabase = GetComponent<ItemDatabase>();
     }
 
+
     private void OnDisable()
     {
         EventManager.OnItemClaimed -= ItemClaimed;
@@ -96,10 +94,12 @@ public class Inventory : MonoBehaviour
         EventManager.OnGiveUpButtonClicked -= GiveUpButtonClicked;
     }
 
+
     private void OnApplicationQuit()
     {
         SaveSystem.SaveInventoryData(this);
     }
+
 
     private void LoadInventoryData()
     {
@@ -113,10 +113,12 @@ public class Inventory : MonoBehaviour
         EventManager.CurrencyAmountSet(currencyItems[1], 0, 1, false);
     }
 
+
     private void InventoryButtonClicked()
     {
         SetInventoryItems(currencyItems, specialItems, upgradeItems, false);
     }
+
 
     private void GiveUpButtonClicked()
     {
@@ -124,6 +126,7 @@ public class Inventory : MonoBehaviour
         inGameSpecialItems.Clear();
         inGameUpgradeItems.Clear();
     }
+
 
     private void CashOutButtonClicked()
     {
@@ -134,6 +137,7 @@ public class Inventory : MonoBehaviour
             TransferInGameItemsToInventory();
         }
     }
+
 
     private void CloseButtonAction()
     {
@@ -146,11 +150,12 @@ public class Inventory : MonoBehaviour
         inventoryItemSlotGOs.Clear();
     }
 
+
     private void SetInventoryItems(Dictionary<int,int> currencyDict, Dictionary<int, int> specialItemDict, Dictionary<int, int> upgradeItemDict, bool isInGameInventory)
     {
         panelParentTransform.gameObject.SetActive(true);
 
-        inventoryHeaderText.text = isInGameInventory ? "COLLECTED ITEMS" : "INVENTORY";
+        inventoryHeaderText.text = isInGameInventory ? COLLECTED_ITEMS_STRING : INVENTORY_STRING;
 
         if (currencyDict.TryGetValue(0, out _))
         {
@@ -173,7 +178,7 @@ public class Inventory : MonoBehaviour
 
         for (var i = 0; i < specialItemDict.Count; i++)
         {
-            var inventoryItemSlotGO = Instantiate(Resources.Load("Prefabs/InventoryItemSlot", typeof(GameObject))) as GameObject;
+            var inventoryItemSlotGO = Instantiate(Resources.Load(INVENTORY_ITEM_SLOT_PATH, typeof(GameObject))) as GameObject;
             inventoryItemSlotGO.transform.SetParent(specialItemScrollRect.content);
             inventoryItemSlotGO.transform.DOScale(1,0);
 
@@ -202,13 +207,12 @@ public class Inventory : MonoBehaviour
             {
                 var childWidth = inventoryItemSlotGO.GetComponent<RectTransform>().sizeDelta.x;
                 ScrollSetter.SetScroll(specialItemScrollRect, specialItemDict.Keys.Count, childWidth, 2);
-                //SetScroll(specialItemScrollRect, specialItemDict.Keys.Count);
             }
         }
 
         for (var i = 0; i < upgradeItemDict.Count; i++)
         {
-            var inventoryItemSlotGO = Instantiate(Resources.Load("Prefabs/InventoryItemSlot", typeof(GameObject))) as GameObject;
+            var inventoryItemSlotGO = Instantiate(Resources.Load(INVENTORY_ITEM_SLOT_PATH, typeof(GameObject))) as GameObject;
             inventoryItemSlotGO.transform.SetParent(upgradeItemScrollRect.content);
             inventoryItemSlotGO.transform.DOScale(1, 0);
 
@@ -280,6 +284,7 @@ public class Inventory : MonoBehaviour
 
     }
 
+
     private void CurrencyAmountChanged(int amount, int currencyId, bool playAnimation)
     {
         var currentAmount = 0;
@@ -298,6 +303,7 @@ public class Inventory : MonoBehaviour
         SaveSystem.SaveInventoryData(this);
     }
 
+
     public bool IsAmountInsufficient(int amount, int currencyIndex)
     {
         if (amount < 0 && currencyItems[currencyIndex] + amount < 0)
@@ -310,28 +316,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-    //private void SetScroll(ScrollRect scrollRect, int keyCount)
-    //{
-    //    if (keyCount > 2)
-    //    {
-    //        scrollRect.horizontal = true;
-    //        var spacingTotal = scrollRect.content.GetComponent<HorizontalLayoutGroup>().spacing * (keyCount - 1);
-    //        var deltaSize = InventoryItemSlotWidth * keyCount + spacingTotal + 80;
-    //        var contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
-    //        contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
-    //        contentRectTransform.DOAnchorPosX(-(scrollRect.GetComponent<RectTransform>().sizeDelta.x * .5f), 0);
-    //    }
-    //    else
-    //    {
-    //        scrollRect.horizontal = false;
-    //        var spacingTotal = scrollRect.content.GetComponent<HorizontalLayoutGroup>().spacing * (keyCount - 1);
-    //        var deltaSize = InventoryItemSlotWidth * keyCount + spacingTotal + 80;
-    //        var contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
-    //        contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
-    //        contentRectTransform.DOAnchorPosX(-deltaSize * .5f, 0);
-    //    }
-    //}
 
     private void TransferInGameItemsToInventory()
     {
@@ -386,11 +370,13 @@ public class Inventory : MonoBehaviour
         SaveSystem.SaveInventoryData(this);
     }
 
+
     private void WheelSpinned()
     {
         inGameInventoryButton.interactable = false;
         inGameInventoryButtonCanvasGroup.DOFade(0, 1);
     }
+
 
     private void RevivedContinueButtonClicked()
     {

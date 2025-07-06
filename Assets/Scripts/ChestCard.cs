@@ -6,25 +6,16 @@ using DG.Tweening;
 public class ChestCard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI itemNameText;
-
-    public TextMeshProUGUI ItemNameText => itemNameText;
-
     [SerializeField] private TextMeshProUGUI itemSecondNameText;
-
-    public TextMeshProUGUI ItemSecondNameText => itemSecondNameText;
-
-
+    [SerializeField] private TextMeshProUGUI itemAmountText;
     [SerializeField] private Image itemImage;
 
+    public TextMeshProUGUI ItemNameText => itemNameText;
+    public TextMeshProUGUI ItemSecondNameText => itemSecondNameText;
+    public TextMeshProUGUI ItemAmountText => itemAmountText;
     public Image ItemImage => itemImage;
 
-
-    [SerializeField] private TextMeshProUGUI itemAmountText;
-
-    public TextMeshProUGUI ItemAmountText => itemAmountText;
-
     [SerializeField] private CanvasGroup canvasGroup;
-
 
     private Vector2 cardPunchV2 = new(.05f, .05f);
     private Vector2 cardScaleV2 = new(.5f, .5f);
@@ -56,7 +47,6 @@ public class ChestCard : MonoBehaviour
             .Join(canvasGroup.DOFade(1, .5f))
             .Join(transform.DOScale(Vector2.one, .5f))
             .Append(transform.DOPunchScale(cardPunchV2, .5f, 1, .2f));
-
     }
 
     public void HideCard()
