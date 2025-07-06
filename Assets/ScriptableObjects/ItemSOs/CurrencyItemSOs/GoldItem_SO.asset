@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 1
   itemSprite: {fileID: 21300000, guid: 9086465d055e6439892ad9df7147259e, type: 3}
   itemId: 1
-  defaultItemAmount: 10
+  defaultItemAmount: 1

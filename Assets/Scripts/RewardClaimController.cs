@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
-
+using System.Collections;
 
 public class RewardClaimController : MonoBehaviour
 {
@@ -84,8 +84,8 @@ public class RewardClaimController : MonoBehaviour
         rewardSequence.Append(rewardImage.transform.DOScale(1, 1f))
             .Join(glowImage.DOFade(1, 1f))
             .Append(itemNameAmountCanvasGroup.DOFade(1, 1).OnComplete(() => claimButton.interactable = true))
-            .Append(claimButtonImage.DOFade(1, 1))
-            .Join(claimButtonText.DOFade(1, 1));
+            .Append(claimButtonImage.DOFade(1, .5f))
+            .Join(claimButtonText.DOFade(1, .5f));
 
         idleSpinTween = glowTransform.DORotate(new Vector3(0, 0, -360f), 10f, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Restart).SetRelative().SetEase(Ease.Linear);
@@ -97,17 +97,23 @@ public class RewardClaimController : MonoBehaviour
         if (currentWheelSlot.CurrentItem_SO.itemType is ItemTypes.Chest)
         {
             EventManager.ChestOpenButtonClicked(currentWheelSlot);
+            StartCoroutine(WaitCo(0));
         }
         else
         {
-            EventManager.ItemClaimed(currentWheelSlot);
+            EventManager.ItemClaimed(currentWheelSlot.CurrentItem_SO, currentWheelSlot.CurrentItemAmount);
+            EventManager.BeginFade(1, 1f, true);
+            StartCoroutine(WaitCo(.95f));
         }
+    }
 
+    private IEnumerator WaitCo(float value)
+    {
+        yield return new WaitForSeconds(value);
         rewardSequence.Kill();
         idleSpinTween.Kill();
         SetAlphaValues();
         panelParentTransform.gameObject.SetActive(false);
-
     }
 
     private void SetAlphaValues()
@@ -118,13 +124,4 @@ public class RewardClaimController : MonoBehaviour
         claimButtonImage.DOFade(0, 0);
         claimButtonText.DOFade(0, 0);
     }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (claimButtonTransform && !claimButton)
-            claimButton = claimButtonTransform.GetComponent<Button>();
-    }
-#endif
-
 }

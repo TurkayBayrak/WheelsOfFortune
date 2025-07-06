@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 5bdd9572b79a8453e968520d3b1ee368, type: 3}
+    - {fileID: 102900000, guid: 6df3f840f4dd844d8b765fd1df903488, type: 3}
+    - {fileID: 102900000, guid: ba706597344454afaba6ba0a54fe3bab, type: 3}
+    - {fileID: 102900000, guid: 6bc515541c013494096b01cf5eaabfca, type: 3}
+    - {fileID: 102900000, guid: d33102bc50473416eb67ce81778f188d, type: 3}
+    - {fileID: 102900000, guid: 9a8183ca9b1af481d87f20ac00cd2a41, type: 3}
+    - {fileID: 102900000, guid: 389cac10df07f43c6a9d2e2acd6ebfc0, type: 3}
+    - {fileID: 102900000, guid: 1c7cdee48eb9b498e839cd397989a3e2, type: 3}
+    - {fileID: 102900000, guid: b94c80e7903224762828fb419178e710, type: 3}
+    - {fileID: 102900000, guid: 5ad114e2e59994fca8b65fe8568f5046, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2eb9e620970284df59d5e65987010a13, type: 3}
+  - {fileID: 21300000, guid: 93c94c60133604729bd6b8d50fe4ecd7, type: 3}
+  - {fileID: 21300000, guid: 5d6509b0813ea4adcbd2f8269da5e1ca, type: 3}
+  - {fileID: 21300000, guid: f6aa80d08e0e145df9d2a2371ab8c91a, type: 3}
+  - {fileID: 21300000, guid: 42cd7a1130a8840e2a70f05beb54875d, type: 3}
+  - {fileID: 21300000, guid: 01dcb3b16ed834a1f8f08774fb454f29, type: 3}
+  - {fileID: 21300000, guid: 486f3f6205d32476d975929cf4af037c, type: 3}
+  - {fileID: 21300000, guid: 0cb729f239b7649ae9f44df03ff2d36b, type: 3}
+  - {fileID: 21300000, guid: 47871643491e24435822c895098af01e, type: 3}
+  - {fileID: 21300000, guid: b6cc6d83b526b43aeb373d56a5207ef3, type: 3}
+  - {fileID: 21300000, guid: 0a6a8cf3e4a734cb88e4648c60c9083f, type: 3}
+  - {fileID: 21300000, guid: 5c1d4ff37a1964edf813f9c8296facdf, type: 3}
+  - {fileID: 21300000, guid: 068dc2e48de6f429aab00e887c44fe62, type: 3}
+  - {fileID: 21300000, guid: d3c0b245ffea9434c9d2e70c736b3985, type: 3}
+  - {fileID: 21300000, guid: d54340e5515df4fccb653f8c972b7fef, type: 3}
+  - {fileID: 21300000, guid: 818c01f5102fb4ee4a6ff30a552e9eda, type: 3}
+  - {fileID: 21300000, guid: b17239166bf6c4568b4481b3d47e6f6c, type: 3}
+  - {fileID: 21300000, guid: c623cd16fbc6a464b86cdbf2f78298ad, type: 3}
+  - {fileID: 21300000, guid: 0f767b36b3f3a4d6f955caca2cbba69b, type: 3}
+  - {fileID: 21300000, guid: a7e9f4564a25647c7b313d30fe84cacf, type: 3}
+  - {fileID: 21300000, guid: fa40074735fcc45ae97f3049481b5574, type: 3}
+  - {fileID: 21300000, guid: 9e2e62c7ebcc543a3bfe90916cd173c0, type: 3}
+  - {fileID: 21300000, guid: 302278e7ad3494a268be185f4e45f862, type: 3}
+  - {fileID: 21300000, guid: 5102be28dcc7949039e3f63384490904, type: 3}
+  - {fileID: 21300000, guid: 820ea868542fc4b8cb5de2b1854aca7f, type: 3}
+  - {fileID: 21300000, guid: 2eeebb78a2d324814a341cb73ce5922b, type: 3}
+  - {fileID: 21300000, guid: 63269c98d999d431b93132d4aa66777d, type: 3}
+  - {fileID: 21300000, guid: 53bb31d8b49c946108df064569d5415f, type: 3}
+  - {fileID: 21300000, guid: 4350ec291b3634c9d844c0648e7b8fd0, type: 3}
+  - {fileID: 21300000, guid: 121f9589c06e94787932b7eb69477295, type: 3}
+  - {fileID: 21300000, guid: 1efed4c9bb4904975a9771d0cdc337ee, type: 3}
+  - {fileID: 21300000, guid: ac3045d98e1da496483f2ad3aefb2cdf, type: 3}
+  - {fileID: 21300000, guid: 84709ed9897164e1ba718a5822ace179, type: 3}
+  - {fileID: 21300000, guid: 9e926a0a5163048628a3b802f29ffdd1, type: 3}
+  - {fileID: 21300000, guid: f1d5da3a77b544fff880317c22dfcbe4, type: 3}
+  - {fileID: 21300000, guid: 03ff50da7f405434f9e0321593a4f7eb, type: 3}
+  - {fileID: 21300000, guid: a7997edaac05e4863a294614bfa3015b, type: 3}
+  - {fileID: 21300000, guid: 767716eab70d548abacdc26f90beb794, type: 3}
+  - {fileID: 21300000, guid: 04f0e3fa6d3504abc97e4d92ea39b348, type: 3}
+  - {fileID: 21300000, guid: 39a2c7fa1f7fc407ca86e8bd7898978b, type: 3}
+  - {fileID: 21300000, guid: e650bf3b97368434782618e1b08cc9f9, type: 3}
+  - {fileID: 21300000, guid: 86e6f0bbeb2394bed9f9341d40af935f, type: 3}
+  - {fileID: 21300000, guid: 063f32db5d2a54aa6948819211e7b3d1, type: 3}
+  - {fileID: 21300000, guid: c3c460eb61be041c7b0c39d74fbe9ac7, type: 3}
+  - {fileID: 21300000, guid: 801427ebf0aa34d44b2c9436d2706a4d, type: 3}
+  - {fileID: 21300000, guid: 47d6289c66785462280af1bff8851da3, type: 3}
+  - {fileID: 21300000, guid: d2e658fc365d8496abd7e30c7bf1672a, type: 3}
+  - {fileID: 21300000, guid: 0940c03d2f071499e9597b63f5f2af5f, type: 3}
+  - {fileID: 21300000, guid: 9086465d055e6439892ad9df7147259e, type: 3}
+  - {fileID: 21300000, guid: e6625bcd2933a4bb48704bd28f738566, type: 3}
+  - {fileID: 21300000, guid: 97b5ce3e9c6d8402c83f34098a5dfe6b, type: 3}
+  - {fileID: 21300000, guid: 32fbb06e853ef4990ac8655429d7af56, type: 3}
+  - {fileID: 21300000, guid: 1ea0021f8a6b44a3385520334694761b, type: 3}
+  - {fileID: 21300000, guid: dc37e23f70e044cf79b3bf17efebc2b4, type: 3}
+  - {fileID: 21300000, guid: 3f66b97f3ee39458797462885a0824aa, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ui_icon_chest_super_nolight
+  - ui_icon_chest_Bronze_nolight
+  - ui_card_panel_zone_white
+  - ui_icon_mle_bayonet_easter_time
+  - UI_Icons_Sniper_Points
+  - ui_spin_silver_indicator
+  - ui_icon_render_cons_healthshot_2_neurostim
+  - ui_icon_baseball_cap_easter
+  - ui_button_orange_standard
+  - ui_icon_chest_big_nolight
+  - UI_Icon_Renders_tier3_sniper
+  - ui_card_frame_4px_zone
+  - ui_icon_render_cons_grenade_m67
+  - ui_spin_golden_base
+  - UI_Icons_Pistol_Points
+  - ui_card_panel_zone_current_white
+  - UI_Icon_Renders_tier2_mle
+  - ui_card_panel_zone_bg
+  - UI_Icon_Renders_tier3_smg
+  - ui_card_panel_zone_current
+  - ui_star_flash_alpha
+  - ui_card_icon_death
+  - UI_Icon_Renders_tier2_rifle
+  - ui_star_glow_alpha
+  - ui_card_panel_zone_coming
+  - ui_spin_bronze_base
+  - ui_icon_chest_silver_nolight
+  - UI_Icons_Shotgun_Points
+  - ui_card_frame_12px_neutral
+  - ui_spin_generic_button
+  - ui_vfx_offer_shine
+  - ui_spin_silver_base
+  - UI_Icons_Knife_Points
+  - ui_icon_mle_bayonet_summer_vice
+  - ui_icon_render_cons_healthshot_2_regenerator
+  - ui_icon_chest_small_noligt
+  - ui_icon_aviator_glasses_easter
+  - UI_Icon_Renders_tier1_shotgun
+  - ui_card_frame_gardient
+  - ui_icon_render_t_cons_molotov
+  - ui_spin_golden_indicator
+  - UI_Icons_Rifle_Points
+  - ui_icon_chest_gold_nolight
+  - ui_icon_helmet_pumpkin
+  - ui_card_panel_zone_super
+  - UI_Icons_SMG_Points
+  - UI_Icon_Renders_tier3_shotgun
+  - ui_button_grey_standard
+  - ui_icon_gold
+  - ui_icon_cash
+  - ui_icon_render_cons_grenade_m26
+  - ui_spin_bronze_indicator
+  - ui_card_zone_map_frame
+  - ui_icon_chest_standart_nolight
+  - UI_Icons_Armor_Points
+  m_RenderDataMap: {}
+  m_Tag: _Sprite Atlas
+  m_IsVariant: 0

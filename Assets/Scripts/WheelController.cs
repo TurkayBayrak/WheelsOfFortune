@@ -65,7 +65,7 @@ public class WheelController : MonoBehaviour
 
     private IEnumerator WaitCo()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.9f);
         idleSpinTween.Kill();
         panelParentTransform.gameObject.SetActive(false);
     }
@@ -79,8 +79,9 @@ public class WheelController : MonoBehaviour
         StartIdleSpin();
     }
 
-    private void ItemClaimed(WheelSlot wheelSlot)
+    private void ItemClaimed(Item_SO item_SO, int amount)
     {
+        panelParentTransform.gameObject.SetActive(true);
         StartIdleSpin();
     }
 
@@ -106,10 +107,10 @@ public class WheelController : MonoBehaviour
         var spinSequence = DOTween.Sequence();
 
         spinSequence.Append(wheelTransform.DORotate(wheelRotateV3, .6f, RotateMode.FastBeyond360)
-            .SetLoops(2, LoopType.Restart).SetRelative().SetEase(Ease.Linear).SetSpeedBased(true))
+            .SetLoops(2, LoopType.Restart).SetRelative().SetEase(Ease.Linear))
 
             .Append(wheelTransform.DORotate(new Vector3(0, 0, residualRotationValue - rotationForRandomization), .6f * .125f * randomNumber, RotateMode.FastBeyond360)
-            .SetRelative().SetEase(Ease.Linear).SetSpeedBased(true))
+            .SetRelative().SetEase(Ease.Linear))
 
             .Append(wheelTransform.DORotate(wheelRotateV3, .7f, RotateMode.FastBeyond360)
             .SetLoops(1, LoopType.Restart).SetRelative().SetEase(Ease.Linear))
@@ -127,7 +128,7 @@ public class WheelController : MonoBehaviour
 
     private void CalculateIndicatedSlot()
     {
-        var slotIndex = Math.Floor(wheelTransform.eulerAngles.z / 45);
+        var slotIndex = Math.Floor((wheelTransform.eulerAngles.z + 5) / 45);
         if (slotIndex < 0)
             slotIndex = 0;
 
@@ -137,6 +138,9 @@ public class WheelController : MonoBehaviour
         {
             yield return new WaitForSeconds(.3f);
             EventManager.RewardReadyToBeClaimed(wheelSlots[_slotIndex]);
+            yield return new WaitForSeconds(.3f);
+
+            panelParentTransform.gameObject.SetActive(false);
         }
     }
 

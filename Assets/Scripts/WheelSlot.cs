@@ -4,9 +4,9 @@ using TMPro;
 
 public class WheelSlot : MonoBehaviour
 {
-    private Image slotImage;
+    [SerializeField] private Image slotImage;
 
-    private TextMeshProUGUI amountText;
+    [SerializeField] private TextMeshProUGUI amountText;
 
     private Item_SO currentItem_SO;
     public Item_SO CurrentItem_SO => currentItem_SO;
@@ -18,8 +18,6 @@ public class WheelSlot : MonoBehaviour
     public void Init(Item_SO item_SO, int zoneCount)
     {
         currentItem_SO = item_SO;
-        slotImage = GetComponent<Image>();
-        amountText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         slotImage.sprite = item_SO.itemSprite;
 

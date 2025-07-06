@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
-  m_Name: Chest_SO 7
+  m_Name: Gold_Chest_SO
   m_EditorClassIdentifier: 
-  itemName: SUPER CHEST
+  itemName: GOLD CHEST
   itemType: 4
-  itemSprite: {fileID: 21300000, guid: 2eb9e620970284df59d5e65987010a13, type: 3}
-  itemId: 2007
+  itemSprite: {fileID: 21300000, guid: 063f32db5d2a54aa6948819211e7b3d1, type: 3}
+  itemId: 2003
   defaultItemAmount: 1
   item_SOs:
-  - {fileID: 11400000, guid: 45ee664edecd84ab9a57f968d14639a5, type: 2}
-  - {fileID: 11400000, guid: 531d792e8745543a4b1335e3adcd23d2, type: 2}
   - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: f9ebd16b363b049478d2d6cc585a951b, type: 2}
   - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
-  - {fileID: 11400000, guid: 9048493b88301431e9853c0d2e4a18f0, type: 2}
-  - {fileID: 11400000, guid: 1179d1225af4a406aaacdfa816b5dde5, type: 2}
+  - {fileID: 11400000, guid: aa4f64f7b613c4e46bcedcf8522be0cd, type: 2}
+  - {fileID: 11400000, guid: 609f81b3d26b34156bf62889d70604bc, type: 2}
+  - {fileID: 11400000, guid: 79a8701a3d8134868913d7d46b4741b9, type: 2}
   - {fileID: 11400000, guid: a0650d01b34b5469698780a0f3bcfc4e, type: 2}
-  - {fileID: 11400000, guid: 387608d1866b648869b2341e18d0596c, type: 2}
-  - {fileID: 11400000, guid: 45ee664edecd84ab9a57f968d14639a5, type: 2}

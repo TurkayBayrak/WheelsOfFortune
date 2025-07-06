@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
-  m_Name: Chest_SO 6
+  m_Name: Standard_Chest_SO
   m_EditorClassIdentifier: 
   itemName: STANDARD CHEST
   itemType: 4
@@ -18,5 +18,6 @@ MonoBehaviour:
   itemId: 2006
   defaultItemAmount: 1
   item_SOs:
-  - {fileID: 11400000, guid: c08dd719421a7490f88ece95da0eb7a8, type: 2}
-  - {fileID: 11400000, guid: f3267ffaa2dc84431839877927b70e22, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: 45ee664edecd84ab9a57f968d14639a5, type: 2}
+  - {fileID: 11400000, guid: 7ff8bd6cfb4bf40df98c2a55bad7173f, type: 2}

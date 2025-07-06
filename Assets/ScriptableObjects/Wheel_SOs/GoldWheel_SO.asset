@@ -15,11 +15,11 @@ MonoBehaviour:
   wheelSprite: {fileID: 21300000, guid: d3c0b245ffea9434c9d2e70c736b3985, type: 3}
   indicatorSprite: {fileID: 21300000, guid: e650bf3b97368434782618e1b08cc9f9, type: 3}
   item_SOs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 8056233f47ecb485a9d779e197f48d84, type: 2}
+  - {fileID: 11400000, guid: 609f81b3d26b34156bf62889d70604bc, type: 2}
+  - {fileID: 11400000, guid: acc3b16f6ef3a4c9cb6eb5a327f84b05, type: 2}
+  - {fileID: 11400000, guid: 1179d1225af4a406aaacdfa816b5dde5, type: 2}
+  - {fileID: 11400000, guid: 1d5a3e8c6b39449aaa32748513be28b2, type: 2}
+  - {fileID: 11400000, guid: 806924741b98242e5bf27fafaa6556d8, type: 2}
+  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
+  - {fileID: 11400000, guid: c82863cb2c893434c9db648ed9e61632, type: 2}

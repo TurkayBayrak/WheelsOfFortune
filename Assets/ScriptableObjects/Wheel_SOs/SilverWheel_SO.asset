@@ -15,11 +15,11 @@ MonoBehaviour:
   wheelSprite: {fileID: 21300000, guid: ac3045d98e1da496483f2ad3aefb2cdf, type: 3}
   indicatorSprite: {fileID: 21300000, guid: 01dcb3b16ed834a1f8f08774fb454f29, type: 3}
   item_SOs:
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
-  - {fileID: 11400000, guid: 16d5052772ddb44e6855044b81474b10, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: 7a9c91c4d02e8488db71260039b7c4e1, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 6ca9f6eb2ee8d4a7fa6a6a6766b0066d, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: 7a9c91c4d02e8488db71260039b7c4e1, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 6ca9f6eb2ee8d4a7fa6a6a6766b0066d, type: 2}

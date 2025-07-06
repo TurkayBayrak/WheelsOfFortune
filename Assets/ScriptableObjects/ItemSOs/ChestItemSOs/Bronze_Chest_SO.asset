@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
-  m_Name: Chest_SO 5
+  m_Name: Bronze_Chest_SO
   m_EditorClassIdentifier: 
-  itemName: SMALL CHEST
+  itemName: BRONZE CHEST
   itemType: 4
-  itemSprite: {fileID: 21300000, guid: 03ff50da7f405434f9e0321593a4f7eb, type: 3}
-  itemId: 2005
+  itemSprite: {fileID: 21300000, guid: 93c94c60133604729bd6b8d50fe4ecd7, type: 3}
+  itemId: 2002
   defaultItemAmount: 1
   item_SOs:
-  - {fileID: 11400000, guid: 71ec7b959425e44339811dd652f5ee7d, type: 2}
-  - {fileID: 11400000, guid: 1d5a3e8c6b39449aaa32748513be28b2, type: 2}
+  - {fileID: 11400000, guid: b696fc8d17a564a97ac171ceda8dda64, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 6140eccf3f69a4724b0ac02190e998d0, type: 2}

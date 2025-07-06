@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -42,10 +43,17 @@ public class MainMenuController : MonoBehaviour
         PlayIdleAnimation();
     }
 
+    private void OnDisable()
+    {
+        EventManager.OnCashOutButtonClicked -= CashOutButtonClicked;
+        EventManager.OnGiveUpButtonClicked -= GiveUpButtonClicked;
+
+        playButton.onClick.RemoveAllListeners();
+        inventoryButton.onClick.RemoveAllListeners();
+    }
 
     private void CashOutButtonClicked()
     {
-        fadeImage.DOFade(1, 1).OnComplete(()=>fadeImage.DOFade(0, 2));
         SetMainMenuOnReturn();
     }
 
@@ -86,7 +94,9 @@ public class MainMenuController : MonoBehaviour
         IEnumerator WaitForCurrencyAnimation()
         {
             yield return new WaitForSeconds(1.5f);
-            fadeImage.DOFade(1, 1).OnComplete(SwitchToGamePanel);
+            EventManager.BeginFade(1, 1, true);
+            yield return new WaitForSeconds(1f);
+            SwitchToGamePanel();
         }
     }
 
@@ -97,16 +107,14 @@ public class MainMenuController : MonoBehaviour
 
         EventManager.PlayButtonClicked();
 
-        fadeImage.DOFade(0, 2);
-
         panelParentTransform.gameObject.SetActive(false);
     }
 
     private void PlayIdleAnimation()
     {
         idleSequence = DOTween.Sequence();
-        idleSequence.Append(playButtonTransform.DOScale(playButtonScaleV3, 1).SetLoops(-1, LoopType.Yoyo))
+        idleSequence.Append(playButtonTransform.DOScale(playButtonScaleV3, 1).SetLoops(Int32.MaxValue, LoopType.Yoyo))
             .Join(wheelTransform.DORotate(wheelRotateV3, 10f, RotateMode.FastBeyond360)
-            .SetLoops(-1, LoopType.Restart).SetRelative().SetEase(Ease.Linear));
+            .SetLoops(Int32.MaxValue, LoopType.Restart).SetRelative().SetEase(Ease.Linear));
     }
 }

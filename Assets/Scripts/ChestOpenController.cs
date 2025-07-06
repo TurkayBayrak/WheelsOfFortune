@@ -70,11 +70,11 @@ public class ChestOpenController : MonoBehaviour
 
         for (var i = 0; i < chestSO.item_SOs.Length; i++)
         {
-            var chestCardGO = Instantiate(Resources.Load("ChestCard", typeof(GameObject))) as GameObject;
+            var chestCardGO = Instantiate(Resources.Load("Prefabs/ChestCard", typeof(GameObject))) as GameObject;
 
             chestCardGO.transform.DOScale(1, 0);
 
-            chestCardGO.transform.parent = chestItemsParentTransform;
+            chestCardGO.transform.SetParent(chestItemsParentTransform);
 
             chestCardGO.transform.position = chestCardDefaultPositionTransform.position;
 
@@ -123,7 +123,9 @@ public class ChestOpenController : MonoBehaviour
             skipButton.gameObject.SetActive(false);
 
 
-            SetScroll();
+            var childWidth = chestCards[0].GetComponent<RectTransform>().sizeDelta.x;
+            ScrollSetter.SetScroll(scrollRect, chestCards.Count, childWidth, 4);
+            //SetScroll();
 
 
             foreach (var chestCard in chestCards)
@@ -162,12 +164,14 @@ public class ChestOpenController : MonoBehaviour
 
     private void ContinueButtonClickAction()
     {
+        EventManager.BeginFade(1, 1f, true);
+        StartCoroutine(WaitForFade());
+
         continueButton.interactable = false;
-        panelParentTransform.gameObject.SetActive(false);
         skipButton.gameObject.SetActive(false);
 
         playedCardCount = 0;
-        EventManager.ItemClaimed(currentWheelSlot);
+        EventManager.ItemClaimed(currentWheelSlot.CurrentItem_SO, currentWheelSlot.CurrentItemAmount);
 
         foreach (var chestCard in chestCards)
         {
@@ -179,6 +183,12 @@ public class ChestOpenController : MonoBehaviour
         itemsEarnedTextTransform.gameObject.SetActive(false);
     }
 
+    private IEnumerator WaitForFade()
+    {
+        yield return new WaitForSeconds(.95f);
+        panelParentTransform.gameObject.SetActive(false);
+    }
+
     private void SkipCardRevealAnimations()
     {
         skipButton.gameObject.SetActive(false);
@@ -188,6 +198,8 @@ public class ChestOpenController : MonoBehaviour
 
     private void SetScroll()
     {
+        scrollRect.horizontal = chestCards.Count > 4;
+
         if (chestCards.Count > 4)
         {
             scrollRect.horizontal = true;
@@ -195,10 +207,17 @@ public class ChestOpenController : MonoBehaviour
             var deltaSize = chestCards[0].GetComponent<RectTransform>().sizeDelta.x * chestCards.Count + spacingTotal + 80;
             var contentRectTransform = contentTransform.GetComponent<RectTransform>();
             contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
+            contentRectTransform.DOAnchorPosX(-(scrollRect.GetComponent<RectTransform>().sizeDelta.x * .5f), 0);
         }
         else
         {
             scrollRect.horizontal = false;
+            var spacingTotal = contentTransform.GetComponent<HorizontalLayoutGroup>().spacing * (chestCards.Count - 1);
+            var deltaSize = chestCards[0].GetComponent<RectTransform>().sizeDelta.x * chestCards.Count + spacingTotal + 80;
+            var contentRectTransform = contentTransform.GetComponent<RectTransform>();
+            contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
+            contentRectTransform.DOAnchorPosX(-(deltaSize / 2), 0);
         }
+
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using System.Collections;
 
 public class WheelSetter : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class WheelSetter : MonoBehaviour
         EventManager.OnPlayButtonClicked += PlayButtonClicked;
         EventManager.OnItemClaimed += SetNextZone;
         EventManager.OnWheelSpinned += WheelSpinned;
+        EventManager.OnGiveUpButtonClicked += GiveUpButtonClicked;
 
         cashOutButton.onClick.AddListener(CashOutButtonClickAction);
 
@@ -43,17 +45,17 @@ public class WheelSetter : MonoBehaviour
         EventManager.OnPlayButtonClicked -= PlayButtonClicked;
         EventManager.OnItemClaimed -= SetNextZone;
         EventManager.OnWheelSpinned -= WheelSpinned;
-
+        EventManager.OnGiveUpButtonClicked -= GiveUpButtonClicked;
     }
 
     private void PlayButtonClicked()
     {
         SetCurrentWheel();
-        SetWheel();
+        SetWheelSprites();
         SetSlots();
     }
 
-    private void SetNextZone(WheelSlot wheelSlot)
+    private void SetNextZone(Item_SO item_SO, int amount)
     {
         zoneCount++;
         zoneCountText.text = "ZONE " + zoneCount;
@@ -67,14 +69,14 @@ public class WheelSetter : MonoBehaviour
             currentWheel_SO = wheel_SOs[2];
             safeSuperZoneText.gameObject.SetActive(true);
             safeSuperZoneText.text = "SUPER ZONE";
-            cashOutButton.gameObject.SetActive(true);
+            SetCashOutButton();
         }
         else if (zoneCount % 5 == 0)
         {
             currentWheel_SO = wheel_SOs[1];
             safeSuperZoneText.gameObject.SetActive(true);
             safeSuperZoneText.text = "SAFE ZONE";
-            cashOutButton.gameObject.SetActive(true);
+            SetCashOutButton();
         }
         else
         {
@@ -84,7 +86,15 @@ public class WheelSetter : MonoBehaviour
         }
     }
 
-    public void SetWheel()
+    private void SetCashOutButton()
+    {
+        cashOutButton.gameObject.SetActive(true);
+        cashOutButtonCanvasGroup.DOFade(1, 0);
+        cashOutButton.interactable = true;
+
+    }
+
+    public void SetWheelSprites()
     {
         wheelImage.sprite = currentWheel_SO.wheelSprite;
         indicatorImage.sprite = currentWheel_SO.indicatorSprite;
@@ -107,7 +117,24 @@ public class WheelSetter : MonoBehaviour
 
     private void CashOutButtonClickAction()
     {
-        zoneCount = 1;
+        SetZoneCountAndText();
+        EventManager.BeginFade(1, 2, true);
         EventManager.CashOutButtonClicked();
+    }
+
+    private void GiveUpButtonClicked()
+    {
+        SetZoneCountAndText();
+    }
+
+    private void SetZoneCountAndText()
+    {
+        StartCoroutine(WaitCo());
+        IEnumerator WaitCo()
+        {
+            yield return new WaitForSeconds(1.9f);
+            zoneCount = 1;
+            zoneCountText.text = "ZONE " + zoneCount;
+        }
     }
 }

@@ -20,13 +20,13 @@ public class CurrencyTextSetter : MonoBehaviour
         EventManager.OnCurrencyAmountSet -= SetCurrencyTextOnChange;
     }
 
-    private void SetCurrencyTextOnChange(int cashAmount, int goldAmount, bool playAnimation)
+    private void SetCurrencyTextOnChange(int amount, int currentAmount, int currencyId, bool playAnimation)
     {
-        var currentCashAmount = Int32.TryParse(cashText.text, out int x);
-        var currentGoldAmount = Int32.TryParse(goldText.text, out int y);
+        var textMesh = currencyId == 0 ? cashText : goldText;
 
-        DOVirtual.Int(x, cashAmount, 1.3f, (value) => cashText.text = value.ToString());
-        DOVirtual.Int(y, goldAmount, 1.3f, (value) => goldText.text = value.ToString());
+        //Int32.TryParse(textMesh.text, out int x);
+
+        DOVirtual.Int(currentAmount, amount, 1.3f, (value) => textMesh.text = value.ToString());
     }
 
 }

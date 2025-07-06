@@ -10,11 +10,11 @@ public class EventManager : MonoBehaviour
         OnRewardReadyToBeClaimed?.Invoke(wheelSlot);
     }
 
-    public static Action<WheelSlot> OnItemClaimed;
+    public static Action<Item_SO, int> OnItemClaimed;
 
-    public static void ItemClaimed(WheelSlot wheelSlot)
+    public static void ItemClaimed(Item_SO item_SO, int amount)
     {
-        OnItemClaimed?.Invoke(wheelSlot);
+        OnItemClaimed?.Invoke(item_SO, amount);
     }
 
 
@@ -32,11 +32,11 @@ public class EventManager : MonoBehaviour
         OnGiveUpButtonClicked?.Invoke();
     }
 
-    public static Action OnBeginFade;
+    public static Action<float, float, bool> OnBeginFade;
 
-    public static void BeginFade()
+    public static void BeginFade(float value, float duration, bool isBlack)
     {
-        OnBeginFade?.Invoke();
+        OnBeginFade?.Invoke(value, duration, isBlack);
     }
 
 
@@ -96,17 +96,17 @@ public class EventManager : MonoBehaviour
 
     public static Action<int, int, bool> OnCurrencyAmountChanged;
 
-    public static void CurrencyAmountChanged(int cashValue, int goldValue, bool playAnimation)
+    public static void CurrencyAmountChanged(int amount, int currencyId, bool playAnimation)
     {
-        OnCurrencyAmountChanged?.Invoke(cashValue, goldValue, playAnimation);
+        OnCurrencyAmountChanged?.Invoke(amount, currencyId, playAnimation);
     }
 
 
-    public static Action<int, int, bool> OnCurrencyAmountSet;
+    public static Action<int, int, int, bool> OnCurrencyAmountSet;
 
-    public static void CurrencyAmountSet(int cashValue, int goldValue, bool playAnimation)
+    public static void CurrencyAmountSet(int amount, int currentAmount, int currencyId, bool playAnimation)
     {
-        OnCurrencyAmountSet?.Invoke(cashValue, goldValue, playAnimation);
+        OnCurrencyAmountSet?.Invoke(amount, currentAmount, currencyId, playAnimation);
     }
 
 }

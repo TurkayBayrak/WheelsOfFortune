@@ -8,13 +8,22 @@ using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
-    public Dictionary<int, int> InGameCurrencyItems = new();
-    public Dictionary<int, int> InGameSpecialItems = new();
-    public Dictionary<int, int> InGameUpgradeItems = new();
+    private Dictionary<int, int> inGameCurrencyItems = new();
+    private Dictionary<int, int> inGameSpecialItems = new();
+    private Dictionary<int, int> inGameUpgradeItems = new();
 
-    public Dictionary<int, int> CurrencyItems = new();
-    public Dictionary<int, int> SpecialItems = new();
-    public Dictionary<int, int> UpgradeItems = new();
+    private Dictionary<int, int> currencyItems = new();
+    private Dictionary<int, int> specialItems = new();
+    private Dictionary<int, int> upgradeItems = new();
+
+    public Dictionary<int, int> InGameCurrencyItems => inGameCurrencyItems;
+    public Dictionary<int, int> InGameSpecialItems => inGameSpecialItems;
+    public Dictionary<int, int> InGameUpgradeItems => inGameUpgradeItems;
+
+    public Dictionary<int, int> CurrencyItems => currencyItems;
+    public Dictionary<int, int> SpecialItems => specialItems;
+    public Dictionary<int, int> UpgradeItems => upgradeItems;
+
 
 
     [SerializeField] private ScrollRect specialItemScrollRect;
@@ -35,15 +44,27 @@ public class Inventory : MonoBehaviour
 
     private CanvasGroup inGameInventoryButtonCanvasGroup;
 
-
-    private readonly float InventoryItemSlotWidth = 700;
-
     private List<GameObject> inventoryItemSlotGOs = new();
 
     private ItemDatabase itemDatabase;
 
+    private readonly int firstSessionCashAmount = 10000;
+    private readonly int firstSessionGoldAmount = 50;
 
 
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("FirstSession") || PlayerPrefs.GetInt("FirstSession") == 0)
+        {
+            CurrencyAmountChanged(firstSessionCashAmount, 0, false);
+            CurrencyAmountChanged(firstSessionGoldAmount, 1, false);
+            PlayerPrefs.SetInt("FirstSession", 1);
+        }
+        else
+        {
+            LoadInventoryData();
+        }
+    }
 
     private void OnEnable()
     {
@@ -56,7 +77,7 @@ public class Inventory : MonoBehaviour
         EventManager.OnGiveUpButtonClicked += GiveUpButtonClicked;
 
 
-        inGameInventoryButton.onClick.AddListener(()=>SetInventoryItems(InGameCurrencyItems, InGameSpecialItems, InGameUpgradeItems, true));
+        inGameInventoryButton.onClick.AddListener(()=>SetInventoryItems(inGameCurrencyItems, inGameSpecialItems, inGameUpgradeItems, true));
         closeButton.onClick.AddListener(CloseButtonAction);
 
         inGameInventoryButtonCanvasGroup = inGameInventoryButton.gameObject.GetComponent<CanvasGroup>();
@@ -75,16 +96,33 @@ public class Inventory : MonoBehaviour
         EventManager.OnGiveUpButtonClicked -= GiveUpButtonClicked;
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveSystem.SaveInventoryData(this);
+    }
+
+    private void LoadInventoryData()
+    {
+        var inventoryData = SaveSystem.LoadInventoryData();
+
+        currencyItems = inventoryData.currencyData;
+        specialItems = inventoryData.specialItemData;
+        upgradeItems = inventoryData.upgradeItemData;
+
+        EventManager.CurrencyAmountSet(currencyItems[0], 0, 0, false);
+        EventManager.CurrencyAmountSet(currencyItems[1], 0, 1, false);
+    }
+
     private void InventoryButtonClicked()
     {
-        SetInventoryItems(CurrencyItems, SpecialItems, UpgradeItems, false);
+        SetInventoryItems(currencyItems, specialItems, upgradeItems, false);
     }
 
     private void GiveUpButtonClicked()
     {
-        InGameCurrencyItems.Clear();
-        InGameSpecialItems.Clear();
-        InGameUpgradeItems.Clear();
+        inGameCurrencyItems.Clear();
+        inGameSpecialItems.Clear();
+        inGameUpgradeItems.Clear();
     }
 
     private void CashOutButtonClicked()
@@ -92,7 +130,7 @@ public class Inventory : MonoBehaviour
         StartCoroutine(WaitForMainMenu());
         IEnumerator WaitForMainMenu()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             TransferInGameItemsToInventory();
         }
     }
@@ -135,8 +173,8 @@ public class Inventory : MonoBehaviour
 
         for (var i = 0; i < specialItemDict.Count; i++)
         {
-            var inventoryItemSlotGO = Instantiate(Resources.Load("InventoryItemSlot", typeof(GameObject))) as GameObject;
-            inventoryItemSlotGO.transform.parent = specialItemScrollRect.content;
+            var inventoryItemSlotGO = Instantiate(Resources.Load("Prefabs/InventoryItemSlot", typeof(GameObject))) as GameObject;
+            inventoryItemSlotGO.transform.SetParent(specialItemScrollRect.content);
             inventoryItemSlotGO.transform.DOScale(1,0);
 
             inventoryItemSlotGOs.Add(inventoryItemSlotGO);
@@ -160,16 +198,18 @@ public class Inventory : MonoBehaviour
                 inventoryItemSlot.ItemSecondNameText.gameObject.SetActive(false);
             }
 
-            if (i == InGameSpecialItems.Count - 1)
+            if (i == specialItemDict.Count - 1)
             {
-                SetScroll(specialItemScrollRect, specialItemDict.Keys.Count);
+                var childWidth = inventoryItemSlotGO.GetComponent<RectTransform>().sizeDelta.x;
+                ScrollSetter.SetScroll(specialItemScrollRect, specialItemDict.Keys.Count, childWidth, 2);
+                //SetScroll(specialItemScrollRect, specialItemDict.Keys.Count);
             }
         }
 
         for (var i = 0; i < upgradeItemDict.Count; i++)
         {
-            var inventoryItemSlotGO = Instantiate(Resources.Load("InventoryItemSlot", typeof(GameObject))) as GameObject;
-            inventoryItemSlotGO.transform.parent = upgradeItemScrollRect.content;
+            var inventoryItemSlotGO = Instantiate(Resources.Load("Prefabs/InventoryItemSlot", typeof(GameObject))) as GameObject;
+            inventoryItemSlotGO.transform.SetParent(upgradeItemScrollRect.content);
             inventoryItemSlotGO.transform.DOScale(1, 0);
 
             inventoryItemSlotGOs.Add(inventoryItemSlotGO);
@@ -185,17 +225,19 @@ public class Inventory : MonoBehaviour
 
             if (i == upgradeItemDict.Count - 1)
             {
-                SetScroll(upgradeItemScrollRect, upgradeItemDict.Keys.Count);
+                var childWidth = inventoryItemSlotGO.GetComponent<RectTransform>().sizeDelta.x;
+                ScrollSetter.SetScroll(upgradeItemScrollRect, upgradeItemDict.Keys.Count, childWidth, 2);
+                //SetScroll(upgradeItemScrollRect, upgradeItemDict.Keys.Count);
             }
 
         }
     }
 
-    private void ItemClaimed(WheelSlot wheelSlot)
+    private void ItemClaimed(Item_SO item_SO, int amount)
     {
-        if (wheelSlot.CurrentItem_SO.itemType == ItemTypes.Chest)
+        if (item_SO.itemType == ItemTypes.Chest)
         {
-            var chestSO = (Chest_SO)wheelSlot.CurrentItem_SO;
+            var chestSO = (Chest_SO)item_SO;
 
             for (var i = 0; i < chestSO.item_SOs.Length; i++)
             {
@@ -204,7 +246,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            AddItemToTheCorrespondingDictionary(wheelSlot.CurrentItem_SO, wheelSlot.CurrentItemAmount);
+            AddItemToTheCorrespondingDictionary(item_SO, amount);
         }
 
         inGameInventoryButton.interactable = true;
@@ -217,13 +259,13 @@ public class Inventory : MonoBehaviour
         switch (item_SO.itemType)
         {
             case ItemTypes.Cash or ItemTypes.Gold:
-                dict = InGameCurrencyItems;
+                dict = inGameCurrencyItems;
                 break;
             case ItemTypes.SpecialItem:
-                dict = InGameSpecialItems;
+                dict = inGameSpecialItems;
                 break;
             case ItemTypes.UpgradePoint:
-                dict = InGameUpgradeItems;
+                dict = inGameUpgradeItems;
                 break;
         }
 
@@ -237,32 +279,29 @@ public class Inventory : MonoBehaviour
             dict.Add(item_SO.itemId, amount);
         }
 
-        //LogDictionaries();
     }
 
-    private void CurrencyAmountChanged(int cashAmount, int goldAmount, bool playAnimation)
+    private void CurrencyAmountChanged(int amount, int currencyId, bool playAnimation)
     {
-
-        for (var currencyId = 0; currencyId <= 1; currencyId++)
+        var currentAmount = 0;
+        if (currencyItems.TryGetValue(currencyId, out _))
         {
-            if (CurrencyItems.TryGetValue(currencyId, out _))
-            {
-                CurrencyItems[currencyId]
-                    += currencyId == 0 ? cashAmount : goldAmount;
-            }
-            else
-            {
-                CurrencyItems.Add(currencyId, currencyId == 0 ? cashAmount : goldAmount);
-            }
+            currentAmount = currencyItems[currencyId];
+            currencyItems[currencyId] += amount;
+        }
+        else
+        {
+            currencyItems.Add(currencyId, amount);
         }
 
-        EventManager.CurrencyAmountSet(CurrencyItems[0], CurrencyItems[1], playAnimation);
+        EventManager.CurrencyAmountSet(currencyItems[currencyId], currentAmount, currencyId, playAnimation);
 
+        SaveSystem.SaveInventoryData(this);
     }
 
     public bool IsAmountInsufficient(int amount, int currencyIndex)
     {
-        if (amount < 0 && CurrencyItems[currencyIndex] + amount < 0)
+        if (amount < 0 && currencyItems[currencyIndex] + amount < 0)
         {
             return true;
         }
@@ -273,56 +312,79 @@ public class Inventory : MonoBehaviour
     }
 
 
-    private void SetScroll(ScrollRect scrollRect, int keyCount)
-    {
-        if (keyCount < 3)
-        {
-            scrollRect.horizontal = false;
-        }
-        else
-        {
-            scrollRect.horizontal = true;
-            var spacingTotal = scrollRect.content.GetComponent<HorizontalLayoutGroup>().spacing * (keyCount - 1);
-            var deltaSize = InventoryItemSlotWidth * keyCount + spacingTotal + 80;
-            var contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
-            contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
-        }
-    }
+    //private void SetScroll(ScrollRect scrollRect, int keyCount)
+    //{
+    //    if (keyCount > 2)
+    //    {
+    //        scrollRect.horizontal = true;
+    //        var spacingTotal = scrollRect.content.GetComponent<HorizontalLayoutGroup>().spacing * (keyCount - 1);
+    //        var deltaSize = InventoryItemSlotWidth * keyCount + spacingTotal + 80;
+    //        var contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
+    //        contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
+    //        contentRectTransform.DOAnchorPosX(-(scrollRect.GetComponent<RectTransform>().sizeDelta.x * .5f), 0);
+    //    }
+    //    else
+    //    {
+    //        scrollRect.horizontal = false;
+    //        var spacingTotal = scrollRect.content.GetComponent<HorizontalLayoutGroup>().spacing * (keyCount - 1);
+    //        var deltaSize = InventoryItemSlotWidth * keyCount + spacingTotal + 80;
+    //        var contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
+    //        contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
+    //        contentRectTransform.DOAnchorPosX(-deltaSize * .5f, 0);
+    //    }
+    //}
 
     private void TransferInGameItemsToInventory()
     {
-        CurrencyAmountChanged(InGameCurrencyItems.ElementAt(0).Value, InGameCurrencyItems.ElementAt(1).Value, true);
 
-        for (var i = 0; i < InGameSpecialItems.Count; i++)
+        if (inGameCurrencyItems.TryGetValue(0, out _))
         {
-            var element = InGameSpecialItems.ElementAt(i);
+
+            CurrencyAmountChanged(inGameCurrencyItems[0], 0, true);
+        }
+
+        if (inGameCurrencyItems.TryGetValue(1, out _))
+        {
+
+            CurrencyAmountChanged(inGameCurrencyItems[1], 1, true);
+        }
+
+
+        for (var i = 0; i < inGameSpecialItems.Count; i++)
+        {
+            var element = inGameSpecialItems.ElementAt(i);
             
-            if (SpecialItems.TryGetValue(element.Key, out _))
+            if (specialItems.TryGetValue(element.Key, out _))
             {
-                SpecialItems[element.Key]
+                specialItems[element.Key]
                     += element.Value;
             }
             else
             {
-                SpecialItems.Add(element.Key, element.Value);
+                specialItems.Add(element.Key, element.Value);
             }
         }
 
-        for (var i = 0; i < InGameUpgradeItems.Count; i++)
+        for (var i = 0; i < inGameUpgradeItems.Count; i++)
         {
-            var element = InGameUpgradeItems.ElementAt(i);
+            var element = inGameUpgradeItems.ElementAt(i);
 
-            if (UpgradeItems.TryGetValue(element.Key, out _))
+            if (upgradeItems.TryGetValue(element.Key, out _))
             {
-                UpgradeItems[element.Key]
+                upgradeItems[element.Key]
                     += element.Value;
             }
             else
             {
-                UpgradeItems.Add(element.Key, element.Value);
+                upgradeItems.Add(element.Key, element.Value);
             }
         }
 
+        inGameCurrencyItems.Clear();
+        inGameSpecialItems.Clear();
+        inGameUpgradeItems.Clear();
+
+        SaveSystem.SaveInventoryData(this);
     }
 
     private void WheelSpinned()
