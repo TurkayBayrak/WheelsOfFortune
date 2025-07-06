@@ -10,11 +10,11 @@ public class EventManager : MonoBehaviour
         OnRewardReadyToBeClaimed?.Invoke(wheelSlot);
     }
 
-    public static Action<Item_SO, int> OnItemClaimed;
+    public static Action<int, Item_SO, Item_SO[]> OnItemClaimed;
 
-    public static void ItemClaimed(Item_SO item_SO, int amount)
+    public static void ItemClaimed(int amount, Item_SO item_SO, Item_SO[] item_SOs)
     {
-        OnItemClaimed?.Invoke(item_SO, amount);
+        OnItemClaimed?.Invoke(amount, item_SO, item_SOs);
     }
 
 

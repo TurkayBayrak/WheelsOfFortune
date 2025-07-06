@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3bc792ca9f54822b249c62dd38d9ea, type: 3}
+  m_Name: Bronze_Wheel_SO
+  m_EditorClassIdentifier: 
+  wheelSprite: {fileID: 21300000, guid: 2eeebb78a2d324814a341cb73ce5922b, type: 3}
+  indicatorSprite: {fileID: 21300000, guid: 32fbb06e853ef4990ac8655429d7af56, type: 3}
+  item_SOs:
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 8bdc789358fd34833abb62bf8f7be9de, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: 306485a7da0f34cc698ceb85378c46c1, type: 2}
+  - {fileID: 11400000, guid: e370b4f68274d47a6bc36a54329cf8f5, type: 2}
+  - {fileID: 11400000, guid: 7cd869a2683eb40669b537184a1885c8, type: 2}
+  - {fileID: 11400000, guid: 6493573646b754137bd5bb7ee148ced7, type: 2}
+  - {fileID: 11400000, guid: a62352a92796f467e8db2285a0e3d146, type: 2}

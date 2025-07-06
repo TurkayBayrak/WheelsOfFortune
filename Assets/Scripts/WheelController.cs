@@ -79,7 +79,7 @@ public class WheelController : MonoBehaviour
         StartIdleSpin();
     }
 
-    private void ItemClaimed(Item_SO item_SO, int amount)
+    private void ItemClaimed(int amount, Item_SO item_SO = null, Item_SO[] item_SOs = null )
     {
         panelParentTransform.gameObject.SetActive(true);
         StartIdleSpin();
@@ -129,8 +129,7 @@ public class WheelController : MonoBehaviour
     private void CalculateIndicatedSlot()
     {
         var slotIndex = Math.Floor((wheelTransform.eulerAngles.z + 5) / 45);
-        if (slotIndex < 0)
-            slotIndex = 0;
+        slotIndex = Math.Clamp(slotIndex, 0, 7);
 
         StartCoroutine(WaitCo((int)slotIndex));
 
@@ -143,14 +142,4 @@ public class WheelController : MonoBehaviour
             panelParentTransform.gameObject.SetActive(false);
         }
     }
-
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if(spinButtonTransform && !spinButton)
-            spinButton = spinButtonTransform.GetComponent<Button>();
-    }
-#endif
-
 }

@@ -30,8 +30,10 @@ public class ChestOpenController : MonoBehaviour
     private CanvasGroup continueButtonCanvasGroup;
 
     private readonly List<ChestCard> chestCards = new();
+    private List<Item_SO> currentChestItemsList = new();
+
     private int playedCardCount;
-    private WheelSlot currentWheelSlot;
+
 
     private void OnEnable()
     {
@@ -57,7 +59,6 @@ public class ChestOpenController : MonoBehaviour
     {
         continueButton.interactable = false;
         continueButtonCanvasGroup.DOFade(0, 0);
-        currentWheelSlot = wheelSlot;
         panelParentTransform.gameObject.SetActive(true);
         cardIndicatorTransform.gameObject.SetActive(true);
         chestImage.gameObject.SetActive(true);
@@ -68,7 +69,7 @@ public class ChestOpenController : MonoBehaviour
         chestImage.sprite = chestSO.itemSprite;
 
 
-        for (var i = 0; i < chestSO.item_SOs.Length; i++)
+        for (var i = 0; i < chestSO.itemAmountToGive; i++)
         {
             var chestCardGO = Instantiate(Resources.Load("Prefabs/ChestCard", typeof(GameObject))) as GameObject;
 
@@ -80,35 +81,56 @@ public class ChestOpenController : MonoBehaviour
 
             var chestCard = chestCardGO.GetComponent<ChestCard>();
 
-            chestCard.ItemImage.sprite = chestSO.item_SOs[i].itemSprite;
-            chestCard.ItemNameText.text = chestSO.item_SOs[i].itemName;
-            chestCard.ItemAmountText.text = "x" + chestSO.item_SOs[i].defaultItemAmount;
-            chestCard.ItemSecondNameText.gameObject.SetActive(false);
+            var itemTypeRandom = Random.Range(0,100);
 
-
-            if (chestSO.item_SOs[i].itemType == ItemTypes.SpecialItem)
+            if (itemTypeRandom < chestSO.currencyValue)
             {
-                var specialItemSO = (SpecialItem_SO)chestSO.item_SOs[i];
-                if (specialItemSO.hasSecondName)
+                var poolRandom = Random.Range(0, chestSO.currencyItemPool.Length);
+                var itemSo = chestSO.currencyItemPool[poolRandom];
+
+                SetChestCard(chestCard, itemSo);
+            }
+            else if (itemTypeRandom < chestSO.currencyValue + chestSO.specialValue)
+            {
+                var poolRandom = Random.Range(0, chestSO.specialItemPool.Length);
+                var itemSo = (SpecialItem_SO)chestSO.specialItemPool[poolRandom];
+
+                SetChestCard(chestCard, itemSo);
+
+                if (itemSo.hasSecondName)
                 {
                     chestCard.ItemSecondNameText.gameObject.SetActive(true);
-                    chestCard.ItemSecondNameText.text = specialItemSO.secondName;
-                    chestCard.ItemSecondNameText.color = specialItemSO.secondNameColor;
+                    chestCard.ItemSecondNameText.text = itemSo.secondName;
+                    chestCard.ItemSecondNameText.color = itemSo.secondNameColor;
                 }
             }
-
-            chestCards.Add(chestCard);
+            else
+            {
+                var poolRandom = Random.Range(0, chestSO.upgradeItemPool.Length);
+                var itemSo = chestSO.upgradeItemPool[poolRandom];
+                SetChestCard(chestCard, itemSo);
+            }
 
             if (i == 0)
             {
                 chestCard.PlayCardRevealAnimation();
                 playedCardCount++;
-                cardCountIndicatorText.text = (chestSO.item_SOs.Length - playedCardCount).ToString();
+                cardCountIndicatorText.text = (chestSO.itemAmountToGive - playedCardCount).ToString();
                 nextCardButton.gameObject.SetActive(true);
                 skipButton.gameObject.SetActive(true);
             }
-
         }
+    }
+
+    private void SetChestCard(ChestCard chestCard, Item_SO itemSo)
+    {
+        chestCard.ItemImage.sprite = itemSo.itemSprite;
+        chestCard.ItemNameText.text = itemSo.itemName;
+        chestCard.ItemAmountText.text = "x" + itemSo.defaultItemAmount;
+        chestCard.ItemSecondNameText.gameObject.SetActive(false);
+
+        chestCards.Add(chestCard);
+        currentChestItemsList.Add(itemSo);
     }
 
     private void NextCardButtonOnClickAction()
@@ -125,7 +147,6 @@ public class ChestOpenController : MonoBehaviour
 
             var childWidth = chestCards[0].GetComponent<RectTransform>().sizeDelta.x;
             ScrollSetter.SetScroll(scrollRect, chestCards.Count, childWidth, 4);
-            //SetScroll();
 
 
             foreach (var chestCard in chestCards)
@@ -171,7 +192,10 @@ public class ChestOpenController : MonoBehaviour
         skipButton.gameObject.SetActive(false);
 
         playedCardCount = 0;
-        EventManager.ItemClaimed(currentWheelSlot.CurrentItem_SO, currentWheelSlot.CurrentItemAmount);
+
+
+        var item_SOs = currentChestItemsList.ToArray();
+        EventManager.ItemClaimed(0, null, item_SOs);
 
         foreach (var chestCard in chestCards)
         {
@@ -179,6 +203,8 @@ public class ChestOpenController : MonoBehaviour
         }
 
         chestCards.Clear();
+        currentChestItemsList.Clear();
+
 
         itemsEarnedTextTransform.gameObject.SetActive(false);
     }
@@ -194,30 +220,5 @@ public class ChestOpenController : MonoBehaviour
         skipButton.gameObject.SetActive(false);
         playedCardCount = chestCards.Count;
         NextCardButtonOnClickAction();
-    }
-
-    private void SetScroll()
-    {
-        scrollRect.horizontal = chestCards.Count > 4;
-
-        if (chestCards.Count > 4)
-        {
-            scrollRect.horizontal = true;
-            var spacingTotal = contentTransform.GetComponent<HorizontalLayoutGroup>().spacing * (chestCards.Count - 1);
-            var deltaSize = chestCards[0].GetComponent<RectTransform>().sizeDelta.x * chestCards.Count + spacingTotal + 80;
-            var contentRectTransform = contentTransform.GetComponent<RectTransform>();
-            contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
-            contentRectTransform.DOAnchorPosX(-(scrollRect.GetComponent<RectTransform>().sizeDelta.x * .5f), 0);
-        }
-        else
-        {
-            scrollRect.horizontal = false;
-            var spacingTotal = contentTransform.GetComponent<HorizontalLayoutGroup>().spacing * (chestCards.Count - 1);
-            var deltaSize = chestCards[0].GetComponent<RectTransform>().sizeDelta.x * chestCards.Count + spacingTotal + 80;
-            var contentRectTransform = contentTransform.GetComponent<RectTransform>();
-            contentRectTransform.DOSizeDelta(new Vector2(deltaSize, contentRectTransform.sizeDelta.y), 0);
-            contentRectTransform.DOAnchorPosX(-(deltaSize / 2), 0);
-        }
-
     }
 }

@@ -101,7 +101,7 @@ public class RewardClaimController : MonoBehaviour
         }
         else
         {
-            EventManager.ItemClaimed(currentWheelSlot.CurrentItem_SO, currentWheelSlot.CurrentItemAmount);
+            EventManager.ItemClaimed(currentWheelSlot.CurrentItemAmount, currentWheelSlot.CurrentItem_SO, null);
             EventManager.BeginFade(1, 1f, true);
             StartCoroutine(WaitCo(.95f));
         }

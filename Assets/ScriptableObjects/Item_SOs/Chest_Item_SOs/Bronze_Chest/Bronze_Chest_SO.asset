@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
+  m_Name: Bronze_Chest_SO
+  m_EditorClassIdentifier: 
+  itemName: BRONZE CHEST
+  itemType: 4
+  itemSprite: {fileID: 21300000, guid: 93c94c60133604729bd6b8d50fe4ecd7, type: 3}
+  itemId: 2002
+  defaultItemAmount: 1
+  itemAmountToGive: 3
+  currencyItemPool:
+  - {fileID: 11400000, guid: 39387ad12d81645cc88081242e4d182d, type: 2}
+  - {fileID: 11400000, guid: 7ed1f37bce18b4e2ab5b29e0c9c8c00a, type: 2}
+  - {fileID: 11400000, guid: de626aef4a8d34fd6973bbf54dd0aca5, type: 2}
+  - {fileID: 11400000, guid: 02a85443153cd46aea72b90b3dae7dd2, type: 2}
+  specialItemPool:
+  - {fileID: 11400000, guid: aab1b6b1cb3f04821b4df996980501da, type: 2}
+  - {fileID: 11400000, guid: a537a86e35657460db98e00675c65757, type: 2}
+  upgradeItemPool:
+  - {fileID: 11400000, guid: 96e3bb807a7714fbdb8ead49b29e339d, type: 2}
+  - {fileID: 11400000, guid: 2b3a0856daab34de58f80184d3b689d0, type: 2}
+  - {fileID: 11400000, guid: 4055052e5669243d2a327fa3d0a64a06, type: 2}
+  - {fileID: 11400000, guid: 5c9dc44103c8d4a40be50e7ea163630e, type: 2}
+  currencyValue: 35
+  specialValue: 20
+  upgradeValue: 45

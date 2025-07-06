@@ -22,7 +22,6 @@ public class WheelSetter : MonoBehaviour
     private CanvasGroup cashOutButtonCanvasGroup;
 
 
-
     private void OnEnable()
     {
         EventManager.OnPlayButtonClicked += PlayButtonClicked;
@@ -55,7 +54,7 @@ public class WheelSetter : MonoBehaviour
         SetSlots();
     }
 
-    private void SetNextZone(Item_SO item_SO, int amount)
+    private void SetNextZone(int amount, Item_SO item_SO = null, Item_SO[] item_SOs = null)
     {
         zoneCount++;
         zoneCountText.text = "ZONE " + zoneCount;
@@ -68,14 +67,14 @@ public class WheelSetter : MonoBehaviour
         {
             currentWheel_SO = wheel_SOs[2];
             safeSuperZoneText.gameObject.SetActive(true);
-            safeSuperZoneText.text = "SUPER ZONE";
+            safeSuperZoneText.text = "GOLDEN SPIN";
             SetCashOutButton();
         }
         else if (zoneCount % 5 == 0)
         {
             currentWheel_SO = wheel_SOs[1];
             safeSuperZoneText.gameObject.SetActive(true);
-            safeSuperZoneText.text = "SAFE ZONE";
+            safeSuperZoneText.text = "SILVER SPIN";
             SetCashOutButton();
         }
         else

@@ -227,31 +227,30 @@ public class Inventory : MonoBehaviour
             {
                 var childWidth = inventoryItemSlotGO.GetComponent<RectTransform>().sizeDelta.x;
                 ScrollSetter.SetScroll(upgradeItemScrollRect, upgradeItemDict.Keys.Count, childWidth, 2);
-                //SetScroll(upgradeItemScrollRect, upgradeItemDict.Keys.Count);
             }
 
         }
     }
 
-    private void ItemClaimed(Item_SO item_SO, int amount)
-    {
-        if (item_SO.itemType == ItemTypes.Chest)
-        {
-            var chestSO = (Chest_SO)item_SO;
 
-            for (var i = 0; i < chestSO.item_SOs.Length; i++)
-            {
-                AddItemToTheCorrespondingDictionary(chestSO.item_SOs[i], chestSO.item_SOs[i].defaultItemAmount);
-            }
+    private void ItemClaimed(int amount, Item_SO item_SO = null, Item_SO[] item_SOs = null)
+    {
+        if (item_SO)
+        {
+            AddItemToTheCorrespondingDictionary(item_SO, amount);
         }
         else
         {
-            AddItemToTheCorrespondingDictionary(item_SO, amount);
+            foreach (var item in item_SOs)
+            {
+                AddItemToTheCorrespondingDictionary(item, item.defaultItemAmount);
+            }
         }
 
         inGameInventoryButton.interactable = true;
         inGameInventoryButtonCanvasGroup.DOFade(1, 0);
     }
+
 
     private void AddItemToTheCorrespondingDictionary(Item_SO item_SO, int amount)
     {

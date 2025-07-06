@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82950cb079514d04abe8e38e2ae0f93, type: 3}
+  m_Name: Silver_Chest_SO
+  m_EditorClassIdentifier: 
+  itemName: SILVER CHEST
+  itemType: 4
+  itemSprite: {fileID: 21300000, guid: 63269c98d999d431b93132d4aa66777d, type: 3}
+  itemId: 2004
+  defaultItemAmount: 1
+  itemAmountToGive: 5
+  currencyItemPool:
+  - {fileID: 11400000, guid: 9678ee92d01234bf5b3214c9b6857708, type: 2}
+  - {fileID: 11400000, guid: 8cdcf5d5ce64147798bd0ec90207a605, type: 2}
+  - {fileID: 11400000, guid: a87a0ed9466e84943a54466250d25de5, type: 2}
+  - {fileID: 11400000, guid: 85e6793242ec64e43aebd3abb8fb7559, type: 2}
+  specialItemPool:
+  - {fileID: 11400000, guid: f64840e2807684484acba9e041fb1f8f, type: 2}
+  - {fileID: 11400000, guid: 556ac729470e4486d90b67e200fd0617, type: 2}
+  - {fileID: 11400000, guid: b279063ad6d054566a14442c7fa2bce0, type: 2}
+  - {fileID: 11400000, guid: fb5ddcf451e0f442ab7eb012edca973f, type: 2}
+  - {fileID: 11400000, guid: 32fed606c141f446b935100b8b530c90, type: 2}
+  upgradeItemPool:
+  - {fileID: 11400000, guid: bbbb9918952c54ea68a5a89b35219e4a, type: 2}
+  - {fileID: 11400000, guid: 0e1501ebbb1d94cfc93b298a0c6499a6, type: 2}
+  - {fileID: 11400000, guid: 68bcef6a3fb15490b915a97c4b34edc0, type: 2}
+  currencyValue: 30
+  specialValue: 30
+  upgradeValue: 40
