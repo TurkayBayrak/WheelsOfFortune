@@ -78,7 +78,7 @@ public class MainMenuController : MonoBehaviour
     {
         if (inventory.IsAmountInsufficient(-1000, 0))
         {
-            EventManager.InsufficientAmount(false);
+            EventManager.InsufficientAmount(true);
             return;
         }
 

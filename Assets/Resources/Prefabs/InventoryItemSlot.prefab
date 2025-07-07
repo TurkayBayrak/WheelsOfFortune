@@ -128,7 +128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: 0}
+  m_AnchoredPosition: {x: -190, y: 0}
   m_SizeDelta: {x: 310.0001, y: 173.2057}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3257579669502804395
@@ -287,8 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemNameText: {fileID: 1797893426789147691}
   itemSecondNameText: {fileID: 8513693539624417408}
-  itemImage: {fileID: 18971799789680828}
   itemAmountText: {fileID: 7484434693314886447}
+  itemImage: {fileID: 18971799789680828}
 --- !u!1 &3924587735912898911
 GameObject:
   m_ObjectHideFlags: 0

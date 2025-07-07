@@ -4,12 +4,12 @@ using DG.Tweening;
 public class CashAnimationController : MonoBehaviour
 {
     [SerializeField] private RectTransform playButtonCashTransform;
+    [SerializeField] private RectTransform mainMenuCashTransform;
 
     [SerializeField] private Transform[] cashTransforms;
+    [SerializeField] private Transform[] cashFirstMoveTransforms;
 
-    [SerializeField] private Vector2[] cashFirstMovePaths;
 
-    private Vector2 defaultPosV2 = new(593, 434);
 
     private void OnEnable()
     {
@@ -27,13 +27,15 @@ public class CashAnimationController : MonoBehaviour
     {
         foreach (Transform item in cashTransforms)
         {
+            item.DOMove(mainMenuCashTransform.position, 0);
             item.gameObject.SetActive(true);
+
         }
 
         for (var i = 0; i < cashTransforms.Length; i++)
         {
             var sequence = DOTween.Sequence();
-            sequence.Append(cashTransforms[i].DOLocalMove(cashFirstMovePaths[i], .6f))
+            sequence.Append(cashTransforms[i].DOMove(cashFirstMoveTransforms[i].position, .6f))
                 .Append(cashTransforms[i].DOMove(playButtonCashTransform.position, .7f)).OnComplete(ResetAnimationObjects);
         }
     }
@@ -43,7 +45,7 @@ public class CashAnimationController : MonoBehaviour
         foreach (Transform item in cashTransforms)
         {
             item.gameObject.SetActive(false);
-            item.DOLocalMove(defaultPosV2, 0);
+            item.DOMove(mainMenuCashTransform.position, 0);
         }
     }
 }
